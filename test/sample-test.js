@@ -32,3 +32,13 @@ describe("NFTMarketplace", function () {
     console.log("items: ", items)
   });
 });
+
+describe("NFT", function () {
+  it("Should mint an NFT with royalty embedded", async function () {
+    const NFT = await ethers.getContractFactory("NFT");
+    const nft = await NFT.deploy();
+    await nft.deployed();
+
+    await nft.setRoyaltyInfo()
+  });
+});

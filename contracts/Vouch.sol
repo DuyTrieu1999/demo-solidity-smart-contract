@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-import "@openzeppelin/contracts/utils/math/SafeMath.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/math/SafeMath.sol";
+import "@openzeppelin/contracts/ownership/Ownable.sol";
 import "./DuyToken.sol";
 
 contract Vouch is Ownable {
@@ -11,6 +11,12 @@ contract Vouch is Ownable {
   mapping(address => uint256) internal _stakes;
   mapping(address => uint256) internal _rewards;
   mapping(address => uint256) internal _penalties;
+
+  constructor(
+    DuyToken _token
+  ) {
+    token = _token;
+  }
 
   function isStakeHolder(address _address) public view returns(bool, uint256) {
     for (uint256 s = 0; s < _stakeholders.length; s++) {

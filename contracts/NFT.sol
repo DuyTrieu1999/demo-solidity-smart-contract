@@ -11,10 +11,10 @@ contract NFT is ERC721, ERC2981, ERC721Enumerable, Ownable {
   DuyToken public token;
   string public contractUri;
 
-  constructor(uint96 _royaltyFeeInBips, string memory _contractUri) ERC721("MyToken", "MTK") {
+  constructor(DuyToken _token, uint96 _royaltyFeeInBips, string memory _contractUri) ERC721("MyToken", "MTK") {
     setRoyaltyInfo(owner(), _royaltyFeeInBips);
     contractUri = _contractUri;
-    token = new DuyToken();
+    token = _token;
   }
 
   function setRoyaltyInfo(address _receiver, uint96 _royaltyFeeInBips) public onlyOwner {
