@@ -79,6 +79,12 @@ contract TokenCrowdsale is Ownable {
     return _timeLock;
   }
 
+  function releaseFunding(address _beneficiary) public onlyOwner validAddress(_beneficiary) {
+    if (isBeneficiaryExist(_beneficiary)) {
+      beneficiaryDistributionContracts[_beneficiary][0].release();
+    }
+  }
+
   // set funding stage
   function setFundingStage(uint _stage) public onlyOwner {
     if (uint(FundingStage.Seed) == _stage) {
