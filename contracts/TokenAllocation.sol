@@ -52,6 +52,12 @@ contract TokenCrowdsale is Ownable {
     totalFunds = _token.totalSupply();
     projectLaunchDate = _projectLaunchDate;
     releaseTime = _releaseTime;
+    setup();
+  }
+
+  // setup token allocation 
+  function setup() private {
+    
   }
 
   // add beneficiary that will be allowed to extract token after the release date
@@ -72,8 +78,10 @@ contract TokenCrowdsale is Ownable {
     }
     distributedTokens += _amount;
     TokenTimelock _timeLock = new TokenTimelock(token, _beneficiary, releaseTime);
+    token.transfer(_beneficiary, _amount);
 
     beneficiaryDistributionContracts[_beneficiary].push(_timeLock);
+
 
     emit BeneficiaryAdded(_beneficiary, _timeLock, _amount);
     return _timeLock;
